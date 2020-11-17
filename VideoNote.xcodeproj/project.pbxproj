@@ -1,0 +1,547 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		121C693F75C5CBCCD4246549 /* Pods_VideoNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D39E8852FEF90345F84ED /* Pods_VideoNote.framework */; };
+		F422DBB5255BCD22003528EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB4255BCD22003528EA /* AppDelegate.swift */; };
+		F422DBB7255BCD22003528EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB6255BCD22003528EA /* SceneDelegate.swift */; };
+		F422DBB9255BCD22003528EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB8255BCD22003528EA /* ViewController.swift */; };
+		F422DBBC255BCD22003528EA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F422DBBA255BCD22003528EA /* Main.storyboard */; };
+		F422DBBE255BCD25003528EA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F422DBBD255BCD25003528EA /* Assets.xcassets */; };
+		F422DBC1255BCD25003528EA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F422DBBF255BCD25003528EA /* LaunchScreen.storyboard */; };
+		F422DBCA255BCD3D003528EA /* VideoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBC9255BCD3D003528EA /* VideoModel.swift */; };
+		F422DC27255BCDB5003528EA /* 22_登录案例_代码实现2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC15255BCDB5003528EA /* 22_登录案例_代码实现2.mp4 */; };
+		F422DC28255BCDB5003528EA /* 13_Request_获取请求参数通用方式介绍.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC16255BCDB5003528EA /* 13_Request_获取请求参数通用方式介绍.mp4 */; };
+		F422DC29255BCDB5003528EA /* 18_Request_获取ServletContext.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC17255BCDB5003528EA /* 18_Request_获取ServletContext.mp4 */; };
+		F422DC2A255BCDB5003528EA /* 15_Request_获取请求参数中文乱码问题处理.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC18255BCDB5003528EA /* 15_Request_获取请求参数中文乱码问题处理.mp4 */; };
+		F422DC2B255BCDB5003528EA /* 17_Request_共享数据(域对象).mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC19255BCDB5003528EA /* 17_Request_共享数据(域对象).mp4 */; };
+		F422DC2C255BCDB5003528EA /* 21_登录案例_代码实现1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC1A255BCDB5003528EA /* 21_登录案例_代码实现1.mp4 */; };
+		F422DC2D255BCDB5003528EA /* 07_Request_原理.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC1B255BCDB5003528EA /* 07_Request_原理.mp4 */; };
+		F422DC2E255BCDB5003528EA /* 08_Request_继承体系.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC1C255BCDB5003528EA /* 08_Request_继承体系.mp4 */; };
+		F422DC2F255BCDB5003528EA /* 12_Request_获取请求体数据.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC1D255BCDB5003528EA /* 12_Request_获取请求体数据.mp4 */; };
+		F422DC30255BCDB5003528EA /* 11_Request_获取请求头数据.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC1E255BCDB5003528EA /* 11_Request_获取请求头数据.mp4 */; };
+		F422DC31255BCDB5003528EA /* 10_Request_获取请求行数据_代码演示.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC1F255BCDB5003528EA /* 10_Request_获取请求行数据_代码演示.mp4 */; };
+		F422DC32255BCDB5003528EA /* 20_登录案例_分析.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC20255BCDB5003528EA /* 20_登录案例_分析.mp4 */; };
+		F422DC33255BCDB5003528EA /* 14_Request_获取请求参数通用方式演示.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC21255BCDB5003528EA /* 14_Request_获取请求参数通用方式演示.mp4 */; };
+		F422DC34255BCDB5003528EA /* 09_Request_获取请求行数据_方法介绍.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC22255BCDB5003528EA /* 09_Request_获取请求行数据_方法介绍.mp4 */; };
+		F422DC35255BCDB5003528EA /* 16_Request_请求转发.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC23255BCDB5003528EA /* 16_Request_请求转发.mp4 */; };
+		F422DC36255BCDB5003528EA /* 19_登录案例_需求.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC24255BCDB5003528EA /* 19_登录案例_需求.mp4 */; };
+		F422DC37255BCDB5003528EA /* 23_登录案例_BeanUtils基本使用.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC25255BCDB5003528EA /* 23_登录案例_BeanUtils基本使用.mp4 */; };
+		F422DC38255BCDB5003528EA /* 24_登录案例_BeanUtils介绍.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = F422DC26255BCDB5003528EA /* 24_登录案例_BeanUtils介绍.mp4 */; };
+		F422DC3D255BCF46003528EA /* ListPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DC3C255BCF46003528EA /* ListPageViewModel.swift */; };
+		F422DC43255BDF90003528EA /* VideoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DC41255BDF90003528EA /* VideoItemCell.swift */; };
+		F422DC44255BDF90003528EA /* VideoItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F422DC42255BDF90003528EA /* VideoItemCell.xib */; };
+		F4A60F75255D219900D4E9BA /* FullPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A60F74255D219900D4E9BA /* FullPlayerView.swift */; };
+		F4A60F79255D21C100D4E9BA /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A60F77255D21C100D4E9BA /* DetailController.swift */; };
+		F4A60F7A255D21C100D4E9BA /* DetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A60F78255D21C100D4E9BA /* DetailController.xib */; };
+		F4A60F7D255D26FA00D4E9BA /* AppNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A60F7C255D26FA00D4E9BA /* AppNavigationController.swift */; };
+		F4A60F80255D27A000D4E9BA /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A60F7F255D27A000D4E9BA /* AppViewController.swift */; };
+		F4A60F84255D282E00D4E9BA /* GlobalVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A60F83255D282E00D4E9BA /* GlobalVars.swift */; };
+		F4B9F903255BE9D5006C57AA /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B9F902255BE9D5006C57AA /* PlayerView.swift */; };
+		F4B9F906255BEBA1006C57AA /* SimplifiedPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B9F905255BEBA1006C57AA /* SimplifiedPlayerView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AB4EF9DA35C78216E0D7B95E /* Pods-VideoNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoNote.debug.xcconfig"; path = "Target Support Files/Pods-VideoNote/Pods-VideoNote.debug.xcconfig"; sourceTree = "<group>"; };
+		CEA6867F6794AB7A19A14944 /* Pods-VideoNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoNote.release.xcconfig"; path = "Target Support Files/Pods-VideoNote/Pods-VideoNote.release.xcconfig"; sourceTree = "<group>"; };
+		EF2D39E8852FEF90345F84ED /* Pods_VideoNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F422DBB1255BCD22003528EA /* VideoNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F422DBB4255BCD22003528EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F422DBB6255BCD22003528EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		F422DBB8255BCD22003528EA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F422DBBB255BCD22003528EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F422DBBD255BCD25003528EA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F422DBC0255BCD25003528EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F422DBC2255BCD25003528EA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F422DBC9255BCD3D003528EA /* VideoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoModel.swift; sourceTree = "<group>"; };
+		F422DC15255BCDB5003528EA /* 22_登录案例_代码实现2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "22_登录案例_代码实现2.mp4"; sourceTree = "<group>"; };
+		F422DC16255BCDB5003528EA /* 13_Request_获取请求参数通用方式介绍.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "13_Request_获取请求参数通用方式介绍.mp4"; sourceTree = "<group>"; };
+		F422DC17255BCDB5003528EA /* 18_Request_获取ServletContext.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "18_Request_获取ServletContext.mp4"; sourceTree = "<group>"; };
+		F422DC18255BCDB5003528EA /* 15_Request_获取请求参数中文乱码问题处理.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "15_Request_获取请求参数中文乱码问题处理.mp4"; sourceTree = "<group>"; };
+		F422DC19255BCDB5003528EA /* 17_Request_共享数据(域对象).mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "17_Request_共享数据(域对象).mp4"; sourceTree = "<group>"; };
+		F422DC1A255BCDB5003528EA /* 21_登录案例_代码实现1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "21_登录案例_代码实现1.mp4"; sourceTree = "<group>"; };
+		F422DC1B255BCDB5003528EA /* 07_Request_原理.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "07_Request_原理.mp4"; sourceTree = "<group>"; };
+		F422DC1C255BCDB5003528EA /* 08_Request_继承体系.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "08_Request_继承体系.mp4"; sourceTree = "<group>"; };
+		F422DC1D255BCDB5003528EA /* 12_Request_获取请求体数据.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "12_Request_获取请求体数据.mp4"; sourceTree = "<group>"; };
+		F422DC1E255BCDB5003528EA /* 11_Request_获取请求头数据.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "11_Request_获取请求头数据.mp4"; sourceTree = "<group>"; };
+		F422DC1F255BCDB5003528EA /* 10_Request_获取请求行数据_代码演示.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "10_Request_获取请求行数据_代码演示.mp4"; sourceTree = "<group>"; };
+		F422DC20255BCDB5003528EA /* 20_登录案例_分析.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "20_登录案例_分析.mp4"; sourceTree = "<group>"; };
+		F422DC21255BCDB5003528EA /* 14_Request_获取请求参数通用方式演示.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "14_Request_获取请求参数通用方式演示.mp4"; sourceTree = "<group>"; };
+		F422DC22255BCDB5003528EA /* 09_Request_获取请求行数据_方法介绍.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "09_Request_获取请求行数据_方法介绍.mp4"; sourceTree = "<group>"; };
+		F422DC23255BCDB5003528EA /* 16_Request_请求转发.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "16_Request_请求转发.mp4"; sourceTree = "<group>"; };
+		F422DC24255BCDB5003528EA /* 19_登录案例_需求.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "19_登录案例_需求.mp4"; sourceTree = "<group>"; };
+		F422DC25255BCDB5003528EA /* 23_登录案例_BeanUtils基本使用.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "23_登录案例_BeanUtils基本使用.mp4"; sourceTree = "<group>"; };
+		F422DC26255BCDB5003528EA /* 24_登录案例_BeanUtils介绍.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "24_登录案例_BeanUtils介绍.mp4"; sourceTree = "<group>"; };
+		F422DC3C255BCF46003528EA /* ListPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageViewModel.swift; sourceTree = "<group>"; };
+		F422DC41255BDF90003528EA /* VideoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoItemCell.swift; sourceTree = "<group>"; };
+		F422DC42255BDF90003528EA /* VideoItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoItemCell.xib; sourceTree = "<group>"; };
+		F4A60F74255D219900D4E9BA /* FullPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerView.swift; sourceTree = "<group>"; };
+		F4A60F77255D21C100D4E9BA /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
+		F4A60F78255D21C100D4E9BA /* DetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailController.xib; sourceTree = "<group>"; };
+		F4A60F7C255D26FA00D4E9BA /* AppNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationController.swift; sourceTree = "<group>"; };
+		F4A60F7F255D27A000D4E9BA /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		F4A60F83255D282E00D4E9BA /* GlobalVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVars.swift; sourceTree = "<group>"; };
+		F4B9F902255BE9D5006C57AA /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		F4B9F905255BEBA1006C57AA /* SimplifiedPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplifiedPlayerView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F422DBAE255BCD22003528EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				121C693F75C5CBCCD4246549 /* Pods_VideoNote.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		26E52973A6D127CEEFF5FADD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AB4EF9DA35C78216E0D7B95E /* Pods-VideoNote.debug.xcconfig */,
+				CEA6867F6794AB7A19A14944 /* Pods-VideoNote.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		87A7E2CE4921AE9D69928BA6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF2D39E8852FEF90345F84ED /* Pods_VideoNote.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F422DBA8255BCD22003528EA = {
+			isa = PBXGroup;
+			children = (
+				F422DBB3255BCD22003528EA /* VideoNote */,
+				F422DBB2255BCD22003528EA /* Products */,
+				26E52973A6D127CEEFF5FADD /* Pods */,
+				87A7E2CE4921AE9D69928BA6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F422DBB2255BCD22003528EA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F422DBB1255BCD22003528EA /* VideoNote.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F422DBB3255BCD22003528EA /* VideoNote */ = {
+			isa = PBXGroup;
+			children = (
+				F422DC14255BCDB5003528EA /* videos */,
+				F422DBB4255BCD22003528EA /* AppDelegate.swift */,
+				F422DBB6255BCD22003528EA /* SceneDelegate.swift */,
+				F422DBB8255BCD22003528EA /* ViewController.swift */,
+				F422DBBA255BCD22003528EA /* Main.storyboard */,
+				F422DBBD255BCD25003528EA /* Assets.xcassets */,
+				F422DBBF255BCD25003528EA /* LaunchScreen.storyboard */,
+				F422DBC2255BCD25003528EA /* Info.plist */,
+				F422DBC9255BCD3D003528EA /* VideoModel.swift */,
+				F422DC3C255BCF46003528EA /* ListPageViewModel.swift */,
+				F422DC41255BDF90003528EA /* VideoItemCell.swift */,
+				F422DC42255BDF90003528EA /* VideoItemCell.xib */,
+				F4B9F902255BE9D5006C57AA /* PlayerView.swift */,
+				F4B9F905255BEBA1006C57AA /* SimplifiedPlayerView.swift */,
+				F4A60F74255D219900D4E9BA /* FullPlayerView.swift */,
+				F4A60F77255D21C100D4E9BA /* DetailController.swift */,
+				F4A60F78255D21C100D4E9BA /* DetailController.xib */,
+				F4A60F7C255D26FA00D4E9BA /* AppNavigationController.swift */,
+				F4A60F7F255D27A000D4E9BA /* AppViewController.swift */,
+				F4A60F83255D282E00D4E9BA /* GlobalVars.swift */,
+			);
+			path = VideoNote;
+			sourceTree = "<group>";
+		};
+		F422DC14255BCDB5003528EA /* videos */ = {
+			isa = PBXGroup;
+			children = (
+				F422DC15255BCDB5003528EA /* 22_登录案例_代码实现2.mp4 */,
+				F422DC16255BCDB5003528EA /* 13_Request_获取请求参数通用方式介绍.mp4 */,
+				F422DC17255BCDB5003528EA /* 18_Request_获取ServletContext.mp4 */,
+				F422DC18255BCDB5003528EA /* 15_Request_获取请求参数中文乱码问题处理.mp4 */,
+				F422DC19255BCDB5003528EA /* 17_Request_共享数据(域对象).mp4 */,
+				F422DC1A255BCDB5003528EA /* 21_登录案例_代码实现1.mp4 */,
+				F422DC1B255BCDB5003528EA /* 07_Request_原理.mp4 */,
+				F422DC1C255BCDB5003528EA /* 08_Request_继承体系.mp4 */,
+				F422DC1D255BCDB5003528EA /* 12_Request_获取请求体数据.mp4 */,
+				F422DC1E255BCDB5003528EA /* 11_Request_获取请求头数据.mp4 */,
+				F422DC1F255BCDB5003528EA /* 10_Request_获取请求行数据_代码演示.mp4 */,
+				F422DC20255BCDB5003528EA /* 20_登录案例_分析.mp4 */,
+				F422DC21255BCDB5003528EA /* 14_Request_获取请求参数通用方式演示.mp4 */,
+				F422DC22255BCDB5003528EA /* 09_Request_获取请求行数据_方法介绍.mp4 */,
+				F422DC23255BCDB5003528EA /* 16_Request_请求转发.mp4 */,
+				F422DC24255BCDB5003528EA /* 19_登录案例_需求.mp4 */,
+				F422DC25255BCDB5003528EA /* 23_登录案例_BeanUtils基本使用.mp4 */,
+				F422DC26255BCDB5003528EA /* 24_登录案例_BeanUtils介绍.mp4 */,
+			);
+			path = videos;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F422DBB0255BCD22003528EA /* VideoNote */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F422DBC5255BCD25003528EA /* Build configuration list for PBXNativeTarget "VideoNote" */;
+			buildPhases = (
+				BEF162939D02B18971C2F89D /* [CP] Check Pods Manifest.lock */,
+				F422DBAD255BCD22003528EA /* Sources */,
+				F422DBAE255BCD22003528EA /* Frameworks */,
+				F422DBAF255BCD22003528EA /* Resources */,
+				822AF95D9784DC7C626507CE /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VideoNote;
+			productName = VideoNote;
+			productReference = F422DBB1255BCD22003528EA /* VideoNote.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F422DBA9255BCD22003528EA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					F422DBB0255BCD22003528EA = {
+						CreatedOnToolsVersion = 12.0;
+					};
+				};
+			};
+			buildConfigurationList = F422DBAC255BCD22003528EA /* Build configuration list for PBXProject "VideoNote" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F422DBA8255BCD22003528EA;
+			productRefGroup = F422DBB2255BCD22003528EA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F422DBB0255BCD22003528EA /* VideoNote */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F422DBAF255BCD22003528EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F422DC36255BCDB5003528EA /* 19_登录案例_需求.mp4 in Resources */,
+				F422DC35255BCDB5003528EA /* 16_Request_请求转发.mp4 in Resources */,
+				F422DBC1255BCD25003528EA /* LaunchScreen.storyboard in Resources */,
+				F422DC30255BCDB5003528EA /* 11_Request_获取请求头数据.mp4 in Resources */,
+				F422DC29255BCDB5003528EA /* 18_Request_获取ServletContext.mp4 in Resources */,
+				F422DC2C255BCDB5003528EA /* 21_登录案例_代码实现1.mp4 in Resources */,
+				F422DC37255BCDB5003528EA /* 23_登录案例_BeanUtils基本使用.mp4 in Resources */,
+				F422DC2B255BCDB5003528EA /* 17_Request_共享数据(域对象).mp4 in Resources */,
+				F422DC34255BCDB5003528EA /* 09_Request_获取请求行数据_方法介绍.mp4 in Resources */,
+				F422DC31255BCDB5003528EA /* 10_Request_获取请求行数据_代码演示.mp4 in Resources */,
+				F422DC33255BCDB5003528EA /* 14_Request_获取请求参数通用方式演示.mp4 in Resources */,
+				F422DC27255BCDB5003528EA /* 22_登录案例_代码实现2.mp4 in Resources */,
+				F422DC38255BCDB5003528EA /* 24_登录案例_BeanUtils介绍.mp4 in Resources */,
+				F422DBBE255BCD25003528EA /* Assets.xcassets in Resources */,
+				F422DC2F255BCDB5003528EA /* 12_Request_获取请求体数据.mp4 in Resources */,
+				F4A60F7A255D21C100D4E9BA /* DetailController.xib in Resources */,
+				F422DC2E255BCDB5003528EA /* 08_Request_继承体系.mp4 in Resources */,
+				F422DC32255BCDB5003528EA /* 20_登录案例_分析.mp4 in Resources */,
+				F422DC28255BCDB5003528EA /* 13_Request_获取请求参数通用方式介绍.mp4 in Resources */,
+				F422DC44255BDF90003528EA /* VideoItemCell.xib in Resources */,
+				F422DC2A255BCDB5003528EA /* 15_Request_获取请求参数中文乱码问题处理.mp4 in Resources */,
+				F422DBBC255BCD22003528EA /* Main.storyboard in Resources */,
+				F422DC2D255BCDB5003528EA /* 07_Request_原理.mp4 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		822AF95D9784DC7C626507CE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VideoNote/Pods-VideoNote-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-VideoNote/Pods-VideoNote-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VideoNote/Pods-VideoNote-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEF162939D02B18971C2F89D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VideoNote-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F422DBAD255BCD22003528EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F422DC43255BDF90003528EA /* VideoItemCell.swift in Sources */,
+				F422DBB9255BCD22003528EA /* ViewController.swift in Sources */,
+				F4B9F903255BE9D5006C57AA /* PlayerView.swift in Sources */,
+				F4A60F84255D282E00D4E9BA /* GlobalVars.swift in Sources */,
+				F4B9F906255BEBA1006C57AA /* SimplifiedPlayerView.swift in Sources */,
+				F4A60F75255D219900D4E9BA /* FullPlayerView.swift in Sources */,
+				F422DBB5255BCD22003528EA /* AppDelegate.swift in Sources */,
+				F4A60F80255D27A000D4E9BA /* AppViewController.swift in Sources */,
+				F422DC3D255BCF46003528EA /* ListPageViewModel.swift in Sources */,
+				F4A60F7D255D26FA00D4E9BA /* AppNavigationController.swift in Sources */,
+				F422DBB7255BCD22003528EA /* SceneDelegate.swift in Sources */,
+				F4A60F79255D21C100D4E9BA /* DetailController.swift in Sources */,
+				F422DBCA255BCD3D003528EA /* VideoModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F422DBBA255BCD22003528EA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F422DBBB255BCD22003528EA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F422DBBF255BCD25003528EA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F422DBC0255BCD25003528EA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F422DBC3255BCD25003528EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F422DBC4255BCD25003528EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F422DBC6255BCD25003528EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB4EF9DA35C78216E0D7B95E /* Pods-VideoNote.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LR5U6RACV8;
+				INFOPLIST_FILE = VideoNote/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zhouwk.VideoNote;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F422DBC7255BCD25003528EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CEA6867F6794AB7A19A14944 /* Pods-VideoNote.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LR5U6RACV8;
+				INFOPLIST_FILE = VideoNote/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = zhouwk.VideoNote;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F422DBAC255BCD22003528EA /* Build configuration list for PBXProject "VideoNote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F422DBC3255BCD25003528EA /* Debug */,
+				F422DBC4255BCD25003528EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F422DBC5255BCD25003528EA /* Build configuration list for PBXNativeTarget "VideoNote" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F422DBC6255BCD25003528EA /* Debug */,
+				F422DBC7255BCD25003528EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F422DBA9255BCD22003528EA /* Project object */;
+}
