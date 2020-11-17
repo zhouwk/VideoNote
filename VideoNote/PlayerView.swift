@@ -19,7 +19,8 @@ class PlayerView: UIView {
     
     var played = 0
     var duration = 0
-    var status = AVPlayerItem.Status.unknown
+    var itemStatus = AVPlayerItem.Status.unknown
+    var controlStatus = AVPlayer.TimeControlStatus.waitingToPlayAtSpecifiedRate
 
     override class var layerClass: AnyClass {
         AVPlayerLayer.self
@@ -56,7 +57,7 @@ class PlayerView: UIView {
     
     func initPlayer() {
         player = AVPlayer()
-        player!.isMuted = true
+//        player!.isMuted = true
         if #available(iOS 12.0, *) {
             player!.preventsDisplaySleepDuringVideoPlayback = true
         } else {
@@ -67,18 +68,23 @@ class PlayerView: UIView {
             self.played = Int(time.seconds)
             self.didPlay()
         })
+        player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.initial, .new], context: nil)
         (layer as! AVPlayerLayer).player = player
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" {
-            status = AVPlayerItem.Status(rawValue: change![.newKey] as! Int)!
+            itemStatus = AVPlayerItem.Status(rawValue: change![.newKey] as! Int)!
             statusDidChange()
-            if status == .readyToPlay {
+            if itemStatus == .readyToPlay {
                 // player.currentItem!.duration 有可能是 CMTime(0,0)，从而倒是nan
                 duration = Int(player!.currentItem!.asset.duration.seconds)
                 didGetDuration()
             }
+        } else if keyPath == "timeControlStatus" {
+            let value = change![.newKey] as! Int
+            controlStatus = AVPlayer.TimeControlStatus(rawValue: value)!
+            controlStatusDidChange()
         }
     }
     
@@ -89,6 +95,9 @@ class PlayerView: UIView {
     func statusDidChange() {}
     
     func didGetDuration() {}
+    
+    
+    func controlStatusDidChange() {}
     
     override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)

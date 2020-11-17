@@ -18,6 +18,9 @@ class DetailController: UIViewController {
     @IBOutlet weak var playerTop: NSLayoutConstraint!
     @IBOutlet weak var playerHeight: NSLayoutConstraint!
     
+    
+    var orientationLocked = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         adjustLayouts()
@@ -25,7 +28,23 @@ class DetailController: UIViewController {
         
         playerView.title = video.name
         playerView.playUrl(video.url)
+        
+        playerView.requestLockOrientation = { [ weak self] in
+            self?.orientationLocked = true
+        }
+        playerView.requestUnLockOrientation = { [weak self] in
+            self?.orientationLocked = false
+        }
+        
     }
+    
+//    override var shouldAutorotate: Bool {
+//        !orientationLocked
+//    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        orientationLocked ? .landscape : [.landscape, .portrait]
+    }
+    
     func adjustLayouts() {
         playerTop.constant = IsIphoneX && IsPorital ? 44 : 0
         playerHeight.constant = IsPorital ? KeyWindow!.frame.width * 9 / 16 : KeyWindow!.frame.height

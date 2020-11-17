@@ -25,13 +25,13 @@ class FullPlayerView: PlayerView {
     
     
     var title: String?
-    
     lazy var topBar = addControlBar()
     lazy var bottomBar = addControlBar()
-
-    
-    
     var isControlShowing = false
+    
+    var requestLockOrientation: (() -> ())?
+    var requestUnLockOrientation: (() -> ())?
+    
     
     
     lazy var popBtn: UIButton = {
@@ -91,6 +91,9 @@ class FullPlayerView: PlayerView {
         return progressView
     }()
     
+    
+    var rateBtn: UIButton?
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if isControlShowing {
             hideControls()
@@ -103,24 +106,40 @@ class FullPlayerView: PlayerView {
         
         // topBar 刘海屏 & 垂直 才可以44， 其他都是64
         // bottomBar 固定高度 + safeArea.bottom
-        
-        clipsToBounds = true
-                
+                        
         topBar.frame.size.width = frame.width
-        bottomBar.frame.size.width = frame.width
-        
         topBar.frame.size.height = IsIphoneX && IsPorital ? 44 : 64
+        
+        bottomBar.frame.size.width = frame.width
         bottomBar.frame.size.height = 50
         if #available(iOS 11.0, *) {
             bottomBar.frame.size.height += safeAreaInsets.bottom
         }
-    
-        topBar.frame.origin.y = -topBar.frame.size.height
-        bottomBar.frame.origin.y = frame.size.height
+        bottomBar.frame.origin.y = frame.size.height - bottomBar.frame.height
         
+        
+        layoutTopBarContents()
+        layoutBottomBarContents()
+        
+        topBar.alpha = 0
+        bottomBar.alpha = 0
+        UIView.animate(withDuration: 0.25) {
+            self.topBar.alpha = 1
+            self.bottomBar.alpha = 1
+        }
+    }
+    
+    func layoutTopBarContents() {
+        popBtn.frame.origin.y = IsPorital && !IsIphoneX ? 20 : 0
+        titleLabel.frame.origin.x = popBtn.frame.maxX
+        titleLabel.frame.size.width = topBar.frame.width - titleLabel.frame.origin.x
+        titleLabel.frame.size.height = popBtn.frame.height
+        titleLabel.text = title
+        titleLabel.center.y = popBtn.center.y
+    }
+    
+    func layoutBottomBarContents() {
         if IsPorital {
-            popBtn.frame.origin.y = IsIphoneX ? 0 : 20
-            
             playBtn.frame.origin.x = 10
             playBtn.center.y = bottomBar.frame.height * 0.5
             
@@ -133,8 +152,10 @@ class FullPlayerView: PlayerView {
             progressView.frame.size.width = durationLabel.frame.origin.x - progressView.frame.origin.x - 10
             progressView.center.y = playBtn.center.y
             
+            
+            rateBtn?.isHidden = true
+            
         } else {
-            popBtn.frame.origin.y = 20
             progressView.frame.origin = CGPoint(x: 0, y: 5)
             progressView.frame.size.width = frame.width
             
@@ -144,49 +165,73 @@ class FullPlayerView: PlayerView {
             
             durationLabel.sizeToFit()
             durationLabel.frame.origin.x = playBtn.frame.maxX + 10
+            
             orientationBtn.frame.origin.x = frame.width - orientationBtn.frame.width - 10
+            
+            createRateBtnIfNeeded()
+            rateBtn?.isHidden = false
+            rateBtn?.frame.origin.x = orientationBtn.frame.origin.x - rateBtn!.frame.width - 20
+            rateBtn?.center.y = playBtn.center.y
+            
         }
-        
-        titleLabel.frame.origin.x = popBtn.frame.maxX
-        titleLabel.frame.size.width = topBar.frame.width - titleLabel.frame.origin.x
-        titleLabel.frame.size.height = popBtn.frame.height
-        titleLabel.text = title
-        titleLabel.center.y = popBtn.center.y
-        
         durationLabel.center.y = playBtn.center.y
         orientationBtn.center.y = playBtn.center.y
-
-        
-        topBar.isHidden = false
-        bottomBar.isHidden = false
-        UIView.animate(withDuration: 0.25) {
-            self.topBar.frame.origin.y = 0
-            self.bottomBar.frame.origin.y = self.frame.height - self.bottomBar.frame.height
-        }
     }
+    
+    
+    
+    func createRateBtnIfNeeded() {
+        guard rateBtn == nil else {
+            return
+        }
+        rateBtn = UIButton(type: .custom)
+        rateBtn!.setTitle("倍速", for: .normal)
+        rateBtn!.titleLabel?.font = .systemFont(ofSize: 14)
+        rateBtn!.addTarget(self, action: #selector(rateBtnDidClick(_:)), for: .touchUpInside)
+        rateBtn!.sizeToFit()
+        bottomBar.addSubview(rateBtn!)
+    }
+    
+    
     
     
     override func didGetDuration() {
         durationLabel.text = timeStrOf(played) + "/" + timeStrOf(duration)
-        durationLabel.sizeToFit()
+        layoutBottomBarContents()
     }
     
     override func didPlay() {
         durationLabel.text = timeStrOf(played) + "/" + timeStrOf(duration)
-    }
-    
-    
-    func timeLabelDidChange() {
-        guard isControlShowing else {
-            return
+        if duration != 0 {
+            progressView.progress = Float(played) / Float(duration)
         }
-        durationLabel.sizeToFit()
-        
+        layoutBottomBarContents()
     }
-    
     
     @objc func playBtnDidClick(_ sender: UIButton) {
-        
+        if sender.isSelected {
+            pause()
+        } else {
+            resume()
+        }
+    }
+    
+    @objc func rateBtnDidClick(_ sender: UIButton) {
+        weak var ws = self
+        requestLockOrientation?()
+        let rateView = RateView(frame: bounds, current: player?.rate) { (rate) in
+            ws?.player?.rate = rate
+            sender.setTitle("\(rate)X", for: .normal)
+            ws?.layoutBottomBarContents()
+        } onRemoved: {
+            ws?.requestUnLockOrientation?()
+        }
+        addSubview(rateView)
+    }
+    
+    
+    override func controlStatusDidChange() {
+        playBtn.isSelected = controlStatus == .playing
     }
     
     @objc func orientationBtnDidClick(_ sender: UIButton) {
@@ -206,8 +251,8 @@ class FullPlayerView: PlayerView {
     
     func hideControls() {
         UIView.animate(withDuration: 0.25) {
-            self.topBar.frame.origin.y = -self.topBar.frame.height
-            self.bottomBar.frame.origin.y = self.frame.height
+            self.topBar.alpha = 0
+            self.bottomBar.alpha = 0
         }
     }
     
@@ -252,8 +297,8 @@ extension FullPlayerView {
             return
         }
         if orientation.isPortrait || orientation.isLandscape {
-            topBar.isHidden = true
-            bottomBar.isHidden = true
+            topBar.alpha = 0
+            bottomBar.alpha = 0
             isControlShowing = false
             currentOrientation = orientation
         }
@@ -265,7 +310,7 @@ extension FullPlayerView {
 
 
 class LinearProgressView: UIView {
-    var progress: Float = 0.5 {
+    var progress: Float = 0 {
         didSet {
             if progress > 1 {
                 progress = 1
@@ -290,7 +335,7 @@ class LinearProgressView: UIView {
     
     func initUI() {
         backgroundColor = UIColor.white.withAlphaComponent(0.2)
-        progressLayer.contents = UIColor.orange.cgColor
+        progressLayer.backgroundColor = UIColor.orange.cgColor
         layer.addSublayer(progressLayer)
     }
     
@@ -308,4 +353,128 @@ class LinearProgressView: UIView {
         progressLayer.cornerRadius = frame.height * 0.5
         
     }
+    
+    
 }
+
+
+
+
+class RateView: UIView {
+    
+    private let rates: [Float] = [0.5, 1, 1.5, 2]
+    private let tableView: UITableView
+    private var current: Float?
+    private let onConfirmed: (Float) -> ()
+    private let onRemoved: () -> ()
+    private let reuseId = "UITableViewCell"
+    
+    
+    init(frame: CGRect,
+         current: Float?,
+         onConfirmed: @escaping (Float) -> (),
+         onRemoved: @escaping () -> ()) {
+        
+        self.current = current
+        tableView = UITableView(frame: .zero, style: .plain)
+        tableView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 50
+        defer {
+            tableView.delegate = self
+            tableView.dataSource = self
+            addSubview(tableView)
+        }
+        self.onConfirmed = onConfirmed
+        self.onRemoved = onRemoved
+        super.init(frame: frame)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {
+            return
+        }
+        let loc = touch.location(in: self)
+        if !tableView.frame.contains(loc) {
+            dismissAnimated()
+        }
+    }
+    
+    
+    private func showAnimated() {
+        tableView.frame = CGRect(x: frame.width, y: 0, width: 150, height: frame.height)
+        let insetY = (tableView.frame.height - CGFloat(rates.count) * tableView.rowHeight) * 0.5
+        if insetY > 0 {
+            tableView.contentInset.top = insetY
+        }
+        UIView.animate(withDuration: 0.25) {
+            self.tableView.frame.origin.x = self.frame.width - self.tableView.frame.width
+        } completion: { (_) in
+        }
+    }
+    
+    private func dismissAnimated(rate: Float? = nil) {
+        UIView.animate(withDuration: 0.25) {
+            self.tableView.frame.origin.x = self.frame.width
+        } completion: { (_) in
+            if let rate = rate {
+                self.onConfirmed(rate)
+            }
+            self.onRemoved()
+            self.removeFromSuperview()
+        }
+    }
+    
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        if superview != nil {
+            showAnimated()
+        }
+    }
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+}
+//MARK: UITableViewDelegate, UITableViewDataSource
+extension RateView: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rates.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) {
+            return cell
+        }
+        let cell = UITableViewCell(style: .default, reuseIdentifier: reuseId)
+        cell.textLabel?.font = .boldSystemFont(ofSize: 16)
+        cell.textLabel?.frame = cell.contentView.bounds
+        cell.backgroundColor = .clear
+        cell.textLabel?.textAlignment = .center
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let rate = rates[indexPath.row]
+        cell.textLabel?.text = "\(rate)X"
+        cell.textLabel?.textColor = rate == current ? .orange : .white
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let rate = rates[indexPath.row]
+        if rate == current {
+            return
+        }
+        current = rate
+        tableView.reloadData()
+        dismissAnimated(rate: rate)
+    }
+}
+
