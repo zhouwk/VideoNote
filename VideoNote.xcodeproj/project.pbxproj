@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		121C693F75C5CBCCD4246549 /* Pods_VideoNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D39E8852FEF90345F84ED /* Pods_VideoNote.framework */; };
+		F40585C52564AFCF00A753FE /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40585C42564AFCF00A753FE /* RateView.swift */; };
+		F40585C82564B00000A753FE /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40585C72564B00000A753FE /* LinearProgressView.swift */; };
 		F422DBB5255BCD22003528EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB4255BCD22003528EA /* AppDelegate.swift */; };
 		F422DBB7255BCD22003528EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB6255BCD22003528EA /* SceneDelegate.swift */; };
 		F422DBB9255BCD22003528EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB8255BCD22003528EA /* ViewController.swift */; };
@@ -50,6 +52,8 @@
 		AB4EF9DA35C78216E0D7B95E /* Pods-VideoNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoNote.debug.xcconfig"; path = "Target Support Files/Pods-VideoNote/Pods-VideoNote.debug.xcconfig"; sourceTree = "<group>"; };
 		CEA6867F6794AB7A19A14944 /* Pods-VideoNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VideoNote.release.xcconfig"; path = "Target Support Files/Pods-VideoNote/Pods-VideoNote.release.xcconfig"; sourceTree = "<group>"; };
 		EF2D39E8852FEF90345F84ED /* Pods_VideoNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F40585C42564AFCF00A753FE /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
+		F40585C72564B00000A753FE /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
 		F422DBB1255BCD22003528EA /* VideoNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F422DBB4255BCD22003528EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F422DBB6255BCD22003528EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,7 +112,6 @@
 				AB4EF9DA35C78216E0D7B95E /* Pods-VideoNote.debug.xcconfig */,
 				CEA6867F6794AB7A19A14944 /* Pods-VideoNote.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -161,6 +164,8 @@
 				F4A60F7C255D26FA00D4E9BA /* AppNavigationController.swift */,
 				F4A60F7F255D27A000D4E9BA /* AppViewController.swift */,
 				F4A60F83255D282E00D4E9BA /* GlobalVars.swift */,
+				F40585C42564AFCF00A753FE /* RateView.swift */,
+				F40585C72564B00000A753FE /* LinearProgressView.swift */,
 			);
 			path = VideoNote;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F40585C82564B00000A753FE /* LinearProgressView.swift in Sources */,
 				F422DC43255BDF90003528EA /* VideoItemCell.swift in Sources */,
 				F422DBB9255BCD22003528EA /* ViewController.swift in Sources */,
 				F4B9F903255BE9D5006C57AA /* PlayerView.swift in Sources */,
@@ -332,6 +338,7 @@
 				F4A60F75255D219900D4E9BA /* FullPlayerView.swift in Sources */,
 				F422DBB5255BCD22003528EA /* AppDelegate.swift in Sources */,
 				F4A60F80255D27A000D4E9BA /* AppViewController.swift in Sources */,
+				F40585C52564AFCF00A753FE /* RateView.swift in Sources */,
 				F422DC3D255BCF46003528EA /* ListPageViewModel.swift in Sources */,
 				F4A60F7D255D26FA00D4E9BA /* AppNavigationController.swift in Sources */,
 				F422DBB7255BCD22003528EA /* SceneDelegate.swift in Sources */,

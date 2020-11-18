@@ -75,7 +75,7 @@ class PlayerView: UIView {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" {
             itemStatus = AVPlayerItem.Status(rawValue: change![.newKey] as! Int)!
-            statusDidChange()
+            itemStatusDidChange()
             if itemStatus == .readyToPlay {
                 // player.currentItem!.duration 有可能是 CMTime(0,0)，从而倒是nan
                 duration = Int(player!.currentItem!.asset.duration.seconds)
@@ -92,7 +92,7 @@ class PlayerView: UIView {
     func didPlay() {}
 
     /// 播放状态发生改变
-    func statusDidChange() {}
+    func itemStatusDidChange() {}
     
     func didGetDuration() {}
     

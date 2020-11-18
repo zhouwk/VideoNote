@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import MediaPlayer
 
 
 // notification 不移除后果如何
@@ -24,6 +25,16 @@ import SnapKit
 class FullPlayerView: PlayerView {
     
     
+    enum FingerEventMode {
+        case none, volume, progress, brightness
+    }
+    
+    var eventModel = FingerEventMode.none
+    
+    
+    var startLoc = CGPoint.zero
+
+    
     var title: String?
     lazy var topBar = addControlBar()
     lazy var bottomBar = addControlBar()
@@ -32,6 +43,25 @@ class FullPlayerView: PlayerView {
     var requestLockOrientation: (() -> ())?
     var requestUnLockOrientation: (() -> ())?
     
+    
+    var progressWhenGragging = Float(0)
+    
+    
+    lazy var volumeSlider: UISlider = {
+        let volumeView = MPVolumeView()
+        volumeView.showsVolumeSlider = false
+        volumeView.showsRouteButton = false
+        addSubview(volumeView)
+        return volumeView.subviews.first { $0 is UISlider } as! UISlider
+    }()
+
+    
+    lazy var panGesture: UIPanGestureRecognizer = {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        pan.isEnabled = false
+        addGestureRecognizer(pan)
+        return pan
+    }()
     
     
     lazy var popBtn: UIButton = {
@@ -86,7 +116,6 @@ class FullPlayerView: PlayerView {
     
     lazy var progressView: LinearProgressView = {
         let progressView = LinearProgressView()
-        progressView.frame.size.height = 2
         bottomBar.addSubview(progressView)
         return progressView
     }()
@@ -156,8 +185,8 @@ class FullPlayerView: PlayerView {
             rateBtn?.isHidden = true
             
         } else {
-            progressView.frame.origin = CGPoint(x: 0, y: 5)
-            progressView.frame.size.width = frame.width
+            progressView.frame.origin = CGPoint(x: 10, y: 5)
+            progressView.frame.size.width = frame.width - progressView.frame.origin.x * 2
             
             playBtn.frame.origin.x = 10
             playBtn.center.y = progressView.frame.maxY + 20
@@ -196,11 +225,17 @@ class FullPlayerView: PlayerView {
     
     
     override func didGetDuration() {
+        guard isControlShowing else {
+            return
+        }
         durationLabel.text = timeStrOf(played) + "/" + timeStrOf(duration)
         layoutBottomBarContents()
     }
     
     override func didPlay() {
+        guard isControlShowing, eventModel != .progress else {
+            return
+        }
         durationLabel.text = timeStrOf(played) + "/" + timeStrOf(duration)
         if duration != 0 {
             progressView.progress = Float(played) / Float(duration)
@@ -234,6 +269,10 @@ class FullPlayerView: PlayerView {
         playBtn.isSelected = controlStatus == .playing
     }
     
+    override func itemStatusDidChange() {
+        panGesture.isEnabled = itemStatus == .readyToPlay
+    }
+    
     @objc func orientationBtnDidClick(_ sender: UIButton) {
         let orientation: UIDeviceOrientation = IsPorital ? .landscapeLeft : . portrait
         UIDevice.current.setValue(orientation.rawValue, forKey: "orientation")
@@ -246,6 +285,56 @@ class FullPlayerView: PlayerView {
         } else {
             let porital = UIDeviceOrientation.portrait.rawValue
             UIDevice.current.setValue(porital, forKey: "orientation")
+        }
+    }
+    
+    @objc func handlePanGesture(_ pan: UIPanGestureRecognizer) {
+        let translation = pan.translation(in: pan.view)
+        switch pan.state {
+        case .began:
+            eventModel = .none
+            startLoc = pan.location(in: pan.view)
+        case .changed:
+            if eventModel == .none {
+                if abs(translation.x) > 10 {
+                    eventModel = .progress
+                    progressWhenGragging = Float(played) / Float(duration)
+                } else if abs(translation.y) > 10 {
+                    if startLoc.x < pan.view!.frame.width * 0.5 {
+                        eventModel = .brightness
+                    } else {
+                        eventModel = .volume
+                    }
+                } else {
+                    return
+                }
+            }
+            if eventModel == .progress {
+                let deltaX = translation.x / pan.view!.frame.width
+                if isControlShowing {
+                    progressView.progress += Float(deltaX)
+                }
+            } else {
+                let deltaY = translation.y / pan.view!.frame.height
+                if eventModel == .brightness {
+                    UIScreen.main.brightness -= deltaY
+                } else {
+                    let volume = volumeSlider.value - Float(deltaY)
+                    volumeSlider.setValue(volume, animated: true)
+                }
+            }
+            pan.setTranslation(.zero, in: self)
+        default:
+            
+            if eventModel == .progress {
+                let time = CMTime(value: Int64(progressView.progress * Float(duration)),
+                                  timescale: 1)
+                player?.seek(to: time, completionHandler: { (_) in
+                    self.eventModel = .none
+                })
+            } else {
+                self.eventModel = .none
+            }
         }
     }
     
@@ -304,177 +393,3 @@ extension FullPlayerView {
         }
     }
 }
-
-
-
-
-
-class LinearProgressView: UIView {
-    var progress: Float = 0 {
-        didSet {
-            if progress > 1 {
-                progress = 1
-            } else if progress < 0 {
-                progress = 0
-            }
-            layoutUI()
-        }
-    }
-    
-    
-    let progressLayer = CALayer()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initUI()
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        initUI()
-    }
-    
-    func initUI() {
-        backgroundColor = UIColor.white.withAlphaComponent(0.2)
-        progressLayer.backgroundColor = UIColor.orange.cgColor
-        layer.addSublayer(progressLayer)
-    }
-    
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        layoutUI()
-    }
-    
-    func layoutUI() {
-        layer.cornerRadius = frame.height * 0.5
-        progressLayer.frame = CGRect(x: 0, y: 0,
-                                     width: CGFloat(progress) * frame.width,
-                                     height: frame.height)
-        progressLayer.cornerRadius = frame.height * 0.5
-        
-    }
-    
-    
-}
-
-
-
-
-class RateView: UIView {
-    
-    private let rates: [Float] = [0.5, 1, 1.5, 2]
-    private let tableView: UITableView
-    private var current: Float?
-    private let onConfirmed: (Float) -> ()
-    private let onRemoved: () -> ()
-    private let reuseId = "UITableViewCell"
-    
-    
-    init(frame: CGRect,
-         current: Float?,
-         onConfirmed: @escaping (Float) -> (),
-         onRemoved: @escaping () -> ()) {
-        
-        self.current = current
-        tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-        tableView.separatorStyle = .none
-        tableView.rowHeight = 50
-        defer {
-            tableView.delegate = self
-            tableView.dataSource = self
-            addSubview(tableView)
-        }
-        self.onConfirmed = onConfirmed
-        self.onRemoved = onRemoved
-        super.init(frame: frame)
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {
-            return
-        }
-        let loc = touch.location(in: self)
-        if !tableView.frame.contains(loc) {
-            dismissAnimated()
-        }
-    }
-    
-    
-    private func showAnimated() {
-        tableView.frame = CGRect(x: frame.width, y: 0, width: 150, height: frame.height)
-        let insetY = (tableView.frame.height - CGFloat(rates.count) * tableView.rowHeight) * 0.5
-        if insetY > 0 {
-            tableView.contentInset.top = insetY
-        }
-        UIView.animate(withDuration: 0.25) {
-            self.tableView.frame.origin.x = self.frame.width - self.tableView.frame.width
-        } completion: { (_) in
-        }
-    }
-    
-    private func dismissAnimated(rate: Float? = nil) {
-        UIView.animate(withDuration: 0.25) {
-            self.tableView.frame.origin.x = self.frame.width
-        } completion: { (_) in
-            if let rate = rate {
-                self.onConfirmed(rate)
-            }
-            self.onRemoved()
-            self.removeFromSuperview()
-        }
-    }
-    
-    
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        if superview != nil {
-            showAnimated()
-        }
-    }
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError()
-    }
-}
-//MARK: UITableViewDelegate, UITableViewDataSource
-extension RateView: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rates.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: reuseId) {
-            return cell
-        }
-        let cell = UITableViewCell(style: .default, reuseIdentifier: reuseId)
-        cell.textLabel?.font = .boldSystemFont(ofSize: 16)
-        cell.textLabel?.frame = cell.contentView.bounds
-        cell.backgroundColor = .clear
-        cell.textLabel?.textAlignment = .center
-        cell.selectionStyle = .none
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let rate = rates[indexPath.row]
-        cell.textLabel?.text = "\(rate)X"
-        cell.textLabel?.textColor = rate == current ? .orange : .white
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let rate = rates[indexPath.row]
-        if rate == current {
-            return
-        }
-        current = rate
-        tableView.reloadData()
-        dismissAnimated(rate: rate)
-    }
-}
-
