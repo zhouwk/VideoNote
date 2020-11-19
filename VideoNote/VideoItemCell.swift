@@ -14,7 +14,7 @@ class VideoItemCell: UITableViewCell {
     
     @IBOutlet weak var videoContainer: UIView!
     @IBOutlet weak var preview: UIImageView!
-    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var progressView: PiePanel!
     @IBOutlet weak var nameLabel: UILabel!
     
     
@@ -36,7 +36,7 @@ class VideoItemCell: UITableViewCell {
     }
     
     /// 插入播放器
-    func insertPlayerView(_ playerView: SimplifiedPlayerView) {
+    func insertPlayerView(_ playerView: PlayerView) {
         playerView.frame = videoContainer.bounds
         playerView.isHidden = false
         videoContainer.addSubview(playerView)

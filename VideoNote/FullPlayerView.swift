@@ -22,6 +22,8 @@ import MediaPlayer
 
 //https://www.jianshu.com/p/555cc5b88f6b?_t=1513858823
 
+// 进度保存问题
+
 class FullPlayerView: PlayerView {
     
     
@@ -108,7 +110,6 @@ class FullPlayerView: PlayerView {
         let durationLabel = UILabel()
         durationLabel.font = .systemFont(ofSize: 14)
         durationLabel.textColor = .white
-        durationLabel.text = "00:00"
         bottomBar.addSubview(durationLabel)
         return durationLabel
     }()
@@ -168,6 +169,8 @@ class FullPlayerView: PlayerView {
     }
     
     func layoutBottomBarContents() {
+        
+        durationLabel.text = timeStrOf(played) + "/" + timeStrOf(duration)
         if IsPorital {
             playBtn.frame.origin.x = 10
             playBtn.center.y = bottomBar.frame.height * 0.5
@@ -205,6 +208,7 @@ class FullPlayerView: PlayerView {
         }
         durationLabel.center.y = playBtn.center.y
         orientationBtn.center.y = playBtn.center.y
+        progressView.progress = duration == 0 ? 0 : Float(played) / Float(duration)
     }
     
     
@@ -221,14 +225,11 @@ class FullPlayerView: PlayerView {
         bottomBar.addSubview(rateBtn!)
     }
     
-    
-    
-    
     override func didGetDuration() {
+        super.didGetDuration()
         guard isControlShowing else {
             return
         }
-        durationLabel.text = timeStrOf(played) + "/" + timeStrOf(duration)
         layoutBottomBarContents()
     }
     
@@ -249,6 +250,7 @@ class FullPlayerView: PlayerView {
         } else {
             resume()
         }
+        saveProgress()
     }
     
     @objc func rateBtnDidClick(_ sender: UIButton) {
@@ -325,7 +327,6 @@ class FullPlayerView: PlayerView {
             }
             pan.setTranslation(.zero, in: self)
         default:
-            
             if eventModel == .progress {
                 let time = CMTime(value: Int64(progressView.progress * Float(duration)),
                                   timescale: 1)
@@ -358,6 +359,7 @@ class FullPlayerView: PlayerView {
     override func removeFromSuperview() {
         super.removeFromSuperview()
         NotificationCenter.default.removeObserver(self)
+        saveProgress()
     }
     
     
@@ -367,8 +369,10 @@ class FullPlayerView: PlayerView {
             observeOrientation()
         }
     }
+    
 
     var currentOrientation = UIDevice.current.orientation
+    
 }
 
 extension FullPlayerView {
@@ -378,8 +382,9 @@ extension FullPlayerView {
                                                selector: #selector(orientationDidChange(_:)),
                                                name: UIDevice.orientationDidChangeNotification,
                                                object: nil)
+
     }
-    
+        
     @objc func orientationDidChange(_ notification: Notification) {
         let orientation = UIDevice.current.orientation
         if currentOrientation == orientation {

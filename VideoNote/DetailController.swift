@@ -19,6 +19,8 @@ class DetailController: UIViewController {
     @IBOutlet weak var playerHeight: NSLayoutConstraint!
     
     
+    var didDeinit: (() -> ())?
+    
     var orientationLocked = false
     
     override func viewDidLoad() {
@@ -55,14 +57,14 @@ class DetailController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     
     deinit {
-        print("deinit")
+        playerView.saveProgress()
+        didDeinit?()
     }
 }
 
@@ -77,3 +79,5 @@ extension DetailController {
         adjustLayouts()
     }
 }
+
+

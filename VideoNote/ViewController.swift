@@ -7,6 +7,7 @@
 
 import UIKit
 import AVKit
+import AudioToolbox
 
 
 //https://juejin.im/post/6844903796359823373#comment
@@ -14,18 +15,40 @@ import AVKit
 class ViewController: AppViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    lazy var playerView = SimplifiedPlayerView()
+    lazy var playerView: PlayerView = {
+        let playerView = PlayerView()
+        playerView.isMuted = !switcher.isOn
+        return playerView
+    }()
     var playingRow: Int?
     lazy var viewModel = ListPageViewModel()
     
+    let switcher = UISwitch()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        initUI()
+        viewModel.detectVideos()
+    }
+    
+    
+    func initUI() {
         navigationItem.title = "视频列表"
         viewModel.onLoadData = { [weak self] in
             self?.tableView.reloadData()
         }
-        viewModel.detectVideos()
         tableView.tableFooterView = UIView()
+        
+        switcher.addTarget(self,
+                           action: #selector(switcherValueDidChange(_:)),
+                           for: .valueChanged)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: switcher)
+    }
+    
+    
+    @objc func switcherValueDidChange(_ switcher: UISwitch) {
+        AudioServicesPlaySystemSound(1519)
+        playerView.isMuted = !switcher.isOn
     }
 
     
@@ -34,6 +57,11 @@ class ViewController: AppViewController {
         let videoWidth = tableView.frame.width - 20
         let videoHeight = videoWidth * 9 / 16
         tableView.rowHeight = videoHeight + 50
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
     }
 }
 
@@ -73,8 +101,17 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         playerView.pause()
+        playerView.saveProgress()
+        playerView.shouldRecordPlayed = false
         let detailController = DetailController()
         detailController.video = viewModel.videos[indexPath.row]
+        detailController.didDeinit = { [weak self] in
+            guard let ws = self else {
+                return
+            }
+            ws.playerView.seekAndPlay()
+            ws.playerView.shouldRecordPlayed = true
+        }
         navigationController?.pushViewController(detailController, animated: true)
     }
     

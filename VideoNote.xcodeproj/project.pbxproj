@@ -10,6 +10,7 @@
 		121C693F75C5CBCCD4246549 /* Pods_VideoNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2D39E8852FEF90345F84ED /* Pods_VideoNote.framework */; };
 		F40585C52564AFCF00A753FE /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40585C42564AFCF00A753FE /* RateView.swift */; };
 		F40585C82564B00000A753FE /* LinearProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40585C72564B00000A753FE /* LinearProgressView.swift */; };
+		F40585CB2564CB7000A753FE /* VideoRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40585CA2564CB7000A753FE /* VideoRecorder.swift */; };
 		F422DBB5255BCD22003528EA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB4255BCD22003528EA /* AppDelegate.swift */; };
 		F422DBB7255BCD22003528EA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB6255BCD22003528EA /* SceneDelegate.swift */; };
 		F422DBB9255BCD22003528EA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DBB8255BCD22003528EA /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 		F422DC3D255BCF46003528EA /* ListPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DC3C255BCF46003528EA /* ListPageViewModel.swift */; };
 		F422DC43255BDF90003528EA /* VideoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F422DC41255BDF90003528EA /* VideoItemCell.swift */; };
 		F422DC44255BDF90003528EA /* VideoItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F422DC42255BDF90003528EA /* VideoItemCell.xib */; };
+		F4553E902566493E0058B3FB /* PiePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4553E8F2566493E0058B3FB /* PiePanel.swift */; };
 		F4A60F75255D219900D4E9BA /* FullPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A60F74255D219900D4E9BA /* FullPlayerView.swift */; };
 		F4A60F79255D21C100D4E9BA /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A60F77255D21C100D4E9BA /* DetailController.swift */; };
 		F4A60F7A255D21C100D4E9BA /* DetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A60F78255D21C100D4E9BA /* DetailController.xib */; };
@@ -54,6 +56,7 @@
 		EF2D39E8852FEF90345F84ED /* Pods_VideoNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VideoNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40585C42564AFCF00A753FE /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		F40585C72564B00000A753FE /* LinearProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearProgressView.swift; sourceTree = "<group>"; };
+		F40585CA2564CB7000A753FE /* VideoRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoRecorder.swift; sourceTree = "<group>"; };
 		F422DBB1255BCD22003528EA /* VideoNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F422DBB4255BCD22003528EA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F422DBB6255BCD22003528EA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		F422DC3C255BCF46003528EA /* ListPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPageViewModel.swift; sourceTree = "<group>"; };
 		F422DC41255BDF90003528EA /* VideoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoItemCell.swift; sourceTree = "<group>"; };
 		F422DC42255BDF90003528EA /* VideoItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoItemCell.xib; sourceTree = "<group>"; };
+		F4553E8F2566493E0058B3FB /* PiePanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiePanel.swift; sourceTree = "<group>"; };
 		F4A60F74255D219900D4E9BA /* FullPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerView.swift; sourceTree = "<group>"; };
 		F4A60F77255D21C100D4E9BA /* DetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailController.swift; sourceTree = "<group>"; };
 		F4A60F78255D21C100D4E9BA /* DetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailController.xib; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 				F4A60F83255D282E00D4E9BA /* GlobalVars.swift */,
 				F40585C42564AFCF00A753FE /* RateView.swift */,
 				F40585C72564B00000A753FE /* LinearProgressView.swift */,
+				F40585CA2564CB7000A753FE /* VideoRecorder.swift */,
+				F4553E8F2566493E0058B3FB /* PiePanel.swift */,
 			);
 			path = VideoNote;
 			sourceTree = "<group>";
@@ -340,10 +346,12 @@
 				F4A60F80255D27A000D4E9BA /* AppViewController.swift in Sources */,
 				F40585C52564AFCF00A753FE /* RateView.swift in Sources */,
 				F422DC3D255BCF46003528EA /* ListPageViewModel.swift in Sources */,
+				F40585CB2564CB7000A753FE /* VideoRecorder.swift in Sources */,
 				F4A60F7D255D26FA00D4E9BA /* AppNavigationController.swift in Sources */,
 				F422DBB7255BCD22003528EA /* SceneDelegate.swift in Sources */,
 				F4A60F79255D21C100D4E9BA /* DetailController.swift in Sources */,
 				F422DBCA255BCD3D003528EA /* VideoModel.swift in Sources */,
+				F4553E902566493E0058B3FB /* PiePanel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

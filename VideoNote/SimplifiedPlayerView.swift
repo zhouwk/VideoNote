@@ -11,7 +11,6 @@ class SimplifiedPlayerView: PlayerView {
 
     let volumeBtn = UIButton(type: .custom)
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         volumeBtn.setImage(UIImage(named: "volume_off"), for: .normal)
@@ -26,10 +25,6 @@ class SimplifiedPlayerView: PlayerView {
     @objc func volumeBtnDidClick(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
         player?.isMuted = !sender.isSelected
-    }
-    
-    override func didGetDuration() {
-        print("播放时长： \(duration)")
     }
     
     override func layoutSubviews() {

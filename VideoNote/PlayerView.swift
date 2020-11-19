@@ -9,8 +9,7 @@ import UIKit
 import AVKit
 
 /**
- * 需要监听: rate, status, bound
- *
+ * 保存进度时机： 切换URL， deinit ,termiate
  */
 
 class PlayerView: UIView {
@@ -22,6 +21,21 @@ class PlayerView: UIView {
     var itemStatus = AVPlayerItem.Status.unknown
     var controlStatus = AVPlayer.TimeControlStatus.waitingToPlayAtSpecifiedRate
 
+    var shouldRecordPlayed = true
+    
+    
+    
+    var isMuted: Bool = false {
+        didSet {
+            player?.isMuted = isMuted
+        }
+    }
+    
+    
+    var timeUnit: CMTime {
+        CMTime(value: 1, timescale: 1)
+    }
+    
     override class var layerClass: AnyClass {
         AVPlayerLayer.self
     }
@@ -40,33 +54,53 @@ class PlayerView: UIView {
         if url == currentUrl {
             return
         }
+        saveProgress()
         currentUrl = url
-        if let player = player {
+        if player != nil {
             pause()
-            player.currentItem?.removeObserver(self, forKeyPath: "status")
+            currentItemRemoveKVO()
         } else {
             initPlayer()
         }
         let playerItem = AVPlayerItem(url: url)
-        playerItem.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-        playerItem.addObserver(self, forKeyPath: "duration", options: .new, context: nil)
         player!.replaceCurrentItem(with: playerItem)
+        currentItemAddKVO()
         resume()
+    }
+    
+    
+    func seekAndPlay() {
+        seekToLatest()
+        resume()
+    }
+    
+    
+    func seekToLatest() {
+        if let fileName = currentUrl?.absoluteString.split(separator: "/").last {
+            var ratio = VideoRecorder.default.query(String(fileName)).played
+            if ratio == 1 {
+                ratio = 0
+            }
+            let seconds = Int64(Float(duration) * ratio)
+            player?.seek(to: CMTime(value: seconds, timescale: 1))
+        }
     }
     
     
     func initPlayer() {
         player = AVPlayer()
+        player?.isMuted = isMuted
 //        player!.isMuted = true
         if #available(iOS 12.0, *) {
             player!.preventsDisplaySleepDuringVideoPlayback = true
         } else {
             // Fallback on earlier versions
         }
-        // 尝试弱引用是不是就可以及时释放，是否弱引用之后还需要removeTimeObserve
-        player?.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: .main, using: { (time) in
-            self.played = Int(time.seconds)
-            self.didPlay()
+        player?.addPeriodicTimeObserver(forInterval: timeUnit,
+                                        queue: .main,
+                                        using: { [weak self] (time) in
+            self?.played = Int(time.seconds)
+            self?.didPlay()
         })
         player?.addObserver(self, forKeyPath: "timeControlStatus", options: [.initial, .new], context: nil)
         (layer as! AVPlayerLayer).player = player
@@ -94,19 +128,12 @@ class PlayerView: UIView {
     /// 播放状态发生改变
     func itemStatusDidChange() {}
     
-    func didGetDuration() {}
+    func didGetDuration() {
+        seekToLatest()
+    }
     
     
     func controlStatusDidChange() {}
-    
-    override func willMove(toSuperview newSuperview: UIView?) {
-        super.willMove(toSuperview: newSuperview)
-        // 监听的处理
-        if superview != nil {
-//            player.removeObserver(<#T##observer: NSObject##NSObject#>, forKeyPath: <#T##String#>)
-        }
-    }
-    
     
     func timeStrOf(_ seconds: Int) -> String {
         var str = ""
@@ -119,9 +146,68 @@ class PlayerView: UIView {
         str += secs < 10 ? "0\(secs)" : "\(secs)"
         return str
     }
+    
+    
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        saveProgress()
+    }
+    
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        if superview != nil {
+            observeAppWillTerminate()
+        }
+    }
+    
+    
+    func saveProgress() {
+        if let url = currentUrl,
+           let fileName = url.absoluteString.split(separator: "/").last,
+           shouldRecordPlayed,
+           itemStatus == .readyToPlay,
+           played != 0,
+           duration != 0
+        {
+            VideoRecorder.default.set(Float(played) / Float(duration),
+                                      for: String(fileName))
+        }
+    }
 
+    
+    func currentItemRemoveKVO() {
+        player?.currentItem?.removeObserver(self, forKeyPath: "status")
+        player?.currentItem?.removeObserver(self, forKeyPath: "duration")
+    }
+    
+    func currentItemAddKVO() {
+        player?.currentItem?.addObserver(self,
+                                         forKeyPath: "status",
+                                         options: .new,
+                                         context: nil)
+        player?.currentItem?.addObserver(self,
+                                         forKeyPath: "duration",
+                                         options: .new,
+                                         context: nil)
+    }
         
     deinit {
-        print("player deinit")
+        currentItemRemoveKVO()
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+
+extension PlayerView {
+    func observeAppWillTerminate() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(appWillTerminate(_:)),
+                                               name: UIApplication.willTerminateNotification,
+                                               object: nil)
+    }
+    
+    @objc func appWillTerminate(_ notification: Notification) {
+        saveProgress()
     }
 }

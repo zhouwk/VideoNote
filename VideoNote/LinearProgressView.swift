@@ -22,11 +22,9 @@ class LinearProgressView: UIView {
     
     override var frame: CGRect {
         didSet {
-            super.frame.size.height = 6
+            super.frame.size.height = 4
         }
     }
-    
-    
     
     let progressLayer = CALayer()
     let ballLayer = CALayer()
@@ -42,7 +40,7 @@ class LinearProgressView: UIView {
     
     func initUI() {
         
-        backgroundColor = UIColor.white.withAlphaComponent(0.2)
+        backgroundColor = UIColor.black.withAlphaComponent(0.2)
         
         progressLayer.backgroundColor = UIColor.orange.cgColor
         layer.addSublayer(progressLayer)
@@ -84,6 +82,9 @@ class LinearProgressView: UIView {
         progressLayer.cornerRadius = frame.height * 0.5
         
         
+        
+        let ua = UserDefaults.standard
+        ua.setValue(["nane": "zz"], forKey: "")
         
     }
 }

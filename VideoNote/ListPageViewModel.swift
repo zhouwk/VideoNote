@@ -22,10 +22,12 @@ class ListPageViewModel {
     func detectVideos() {
         let path = Bundle.main.bundlePath
         let files = (try? fm.contentsOfDirectory(atPath: path)) ?? []
+        
         videos.removeAll()
         
         var model: VideoModel
         var viewModel: VideoViewModel
+        
         for file in files {
             if fmts.contains(where: { file.hasSuffix($0) }) {
                 model = VideoModel(name: file, path: path + "/" + file)
@@ -33,6 +35,16 @@ class ListPageViewModel {
                 videos.append(viewModel)
             }
         }
+        
+        
+        files.forEach { (file) in
+            print(file)
+        }
+
+        
+        
+        
+        
         onLoadData?()
         
         generatePreviews()
